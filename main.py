@@ -24,15 +24,18 @@ if __name__ == "__main__":
     idx, (images, labels) = next(enumerate(testloader))
 
     # Prepare model and training
-    device = "cpu"
+    # device = "cpu"
+    device = "cuda"
     model = ConditionalUNet().to(device)
     process = DiffusionProcess()
-    optimizer = optim.Adam(model.parameters(), lr=2e-4)
+    # optimizer = optim.Adam(model.parameters(), lr=2e-4)
+    optimizer = optim.Adam(model.parameters(), lr=2e-3)
     scheduler = optim.lr_scheduler.StepLR(optimizer, 80)
     criterion = torch.nn.MSELoss()
 
     # Training Loop
-    epochs = 100
+    # epochs = 100
+    epochs = 10
     for e in trange(epochs):
         running_loss = 0
         progress_bar = tqdm(trainloader, leave=False)
