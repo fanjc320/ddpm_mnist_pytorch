@@ -74,7 +74,7 @@ dataloader = DataLoader(dataset, batch_size=BATCH_SIZE, shuffle=True, drop_last=
 # images, label = next(enumerate(dataloader))
 data = iter(dataloader)
 images, label = next(data)
-print(f"input image is of shape {images.shape}")
+print(f"input image is of shape {images.shape} len:{len(images)}")
 plt.imshow(images[0, 0], cmap='gray')
 plt.show()
 
@@ -92,8 +92,11 @@ def forward_pass(x_0, eta, t):
 
 # check the degradation for different t values
 # checked
-x = images[33:40]
+# x = images[33:40]
+x = images[30:32]
+print(f"x x.shape:{x.shape} len:{len(x)}")
 eta = torch.randn_like(x)
+lenx = len(x)
 t = torch.randint(0, T, (len(x),)).long()
 t[0] = 9
 
