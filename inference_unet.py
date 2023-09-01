@@ -17,7 +17,8 @@ if __name__ == "__main__":
     device = "cpu"
     batch_size = 100
     model = UNet().to(device)
-    model.load_state_dict(torch.load("unet_mnist.pth"))
+    # model.load_state_dict(torch.load("unet_mnist.pth"))
+    model.load_state_dict(torch.load("unet_mnist1.pth"))
     process = DiffusionProcess()
 
     # Sampling

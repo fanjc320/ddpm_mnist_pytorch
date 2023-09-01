@@ -17,6 +17,7 @@ from mnist_dataset import get_mnist_dataloader
 from diffusion_model import DiffusionProcess
 
 from models import ConditionalUNet
+from models import UNet
 
 if __name__ == "__main__":
     # Prepare images
@@ -26,7 +27,8 @@ if __name__ == "__main__":
     # Prepare model and training
     # device = "cpu"
     device = "cuda"
-    model = ConditionalUNet().to(device)
+    # model = ConditionalUNet().to(device)
+    model = UNet().to(device)
     process = DiffusionProcess()
     # optimizer = optim.Adam(model.parameters(), lr=2e-4)
     optimizer = optim.Adam(model.parameters(), lr=2e-3)
@@ -47,7 +49,8 @@ if __name__ == "__main__":
 
             # Backprop
             optimizer.zero_grad()
-            output = model(diffused_image.to(device), t.to(device), label.to(device))
+            # output = model(diffused_image.to(device), t.to(device), label.to(device))
+            output = model(diffused_image.to(device), t.to(device))
             loss = criterion(epsilon.to(device), output)
             loss.backward()
             optimizer.step()
@@ -58,7 +61,8 @@ if __name__ == "__main__":
         scheduler.step()
 
         # Save model after every epoch
-        torch.save(model.state_dict(), "unet_mnist.pth")
+        # torch.save(model.state_dict(), "unet_mnist.pth")
+        torch.save(model.state_dict(), "unet_mnist1.pth")
 
         # Logging results
         running_loss /= len(trainloader)
