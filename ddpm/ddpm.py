@@ -55,7 +55,7 @@ def show_tensor(tensor):
 # In[11]:
 
 
-device
+print("device:",device)
 
 # In[19]:
 
@@ -453,7 +453,7 @@ np.save("nine_2.npy", np.array(frames))
 
 sum(p.numel() for p in SimpleNet().parameters() if p.requires_grad)
 
-# In[ ]:
+# 运行ok!!!!!!
 
 
 
